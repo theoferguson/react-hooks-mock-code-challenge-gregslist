@@ -1,21 +1,31 @@
-import React from "react";
+import React, {useState} from "react";
 
-function ListingCard() {
+function ListingCard({displayItem, removeItem}) {
+  const [favButton, setFavButton] = useState(false)
+
+  function handleFavorite() {
+    setFavButton(!favButton)
+  }
+
+  function handleRemove() {
+    removeItem(displayItem)
+  }  
+
   return (
     <li className="card">
       <div className="image">
         <span className="price">$0</span>
-        <img src={"https://via.placeholder.com/300x300"} alt={"description"} />
+        <img src={displayItem.image} alt={"description"} />
       </div>
       <div className="details">
-        {true ? (
-          <button className="emoji-button favorite active">★</button>
+        {favButton ? (
+          <button onClick={handleFavorite} className="emoji-button favorite active">★</button>
         ) : (
-          <button className="emoji-button favorite">☆</button>
+          <button onClick={handleFavorite} className="emoji-button favorite">☆</button>
         )}
-        <strong>{"description"}</strong>
-        <span> · {"location"}</span>
-        <button className="emoji-button delete">🗑</button>
+        <strong>{displayItem.description}</strong>
+        <span> · {displayItem.location}</span>
+        <button onClick={handleRemove} className="emoji-button delete">🗑</button>
       </div>
     </li>
   );
