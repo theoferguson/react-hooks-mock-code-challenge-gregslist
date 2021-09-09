@@ -11,13 +11,8 @@ function ListingsContainer({ displayItems, setDisplayItems }) {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => res.json())
-      .then(() => {
-        setDisplayItems(displayItems.filter(newItem => newItem.id !== item.id))
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    setDisplayItems(displayItems.filter(newItem => newItem.id !== item.id))
+
   }
 
   return (
